@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DermaSense AI 2.0</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-lockup">
+      <div class="brand-mark" aria-hidden="true">D</div>
+      <div class="brand-copy"><h1>DermaSense <span>AI</span></h1><p>PERSONALIZED SKINCARE, SIMPLIFIED</p></div>
+    </div>
+    <nav aria-label="Main navigation">
+      <button class="nav-button active-nav" onclick="showSection('home')">Home</button>
+      <button class="nav-button" onclick="showSection('profile')">Profile</button>
+      <button class="nav-button" onclick="showSection('analysis')">Skin Analysis</button>
+      <button class="nav-button" onclick="showSection('products')">Products</button>
+      <button class="nav-button" onclick="showSection('dashboard')">Dashboard</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="section active home-section">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL SKINCARE COMPANION</span>
+        <h2>Healthy-looking skin starts with <em>understanding.</em></h2>
+        <p class="hero-description">A thoughtful approach to your skin. Explore your concerns, build a routine that fits your lifestyle, and discover skincare products selected around your preferences.</p>
+        <div class="hero-actions">
+          <button class="primary hero-cta" onclick="showSection('profile')">Start Skin Analysis <span aria-hidden="true">↗</span></button>
+          <button class="secondary hero-secondary" onclick="showSection('products')">Explore products</button>
+        </div>
+        <div class="hero-trust"><span>✦</span> Personalised guidance <span class="trust-divider">·</span> Skin-first routines <span class="trust-divider">·</span> Budget-aware picks</div>
+      </div>
+      <div class="hero-art" aria-label="Skincare and botanical inspired visual">
+        <div class="hero-image-wrap"><img src="assets/concerns/general-care.jpg" alt="Skincare inspiration" onerror="this.style.display='none'"></div>
+        <div class="floating-note note-top"><span class="note-icon">✧</span><span><b>Your skin, your routine</b><small>Care made personal</small></span></div>
+        <div class="floating-note note-bottom"><span class="note-check">✓</span><span><b>Simple steps</b><small>Built around you</small></span></div>
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      </div>
+      <div class="hero-disclaimer"><span>ⓘ</span> For educational skincare guidance only. This tool does not diagnose medical conditions.</div>
+      <div class="feature-strip">
+        <div class="feature-item"><span class="feature-icon">01</span><div><b>Know your skin</b><small>Share your skin type and preferences</small></div></div>
+        <div class="feature-item"><span class="feature-icon">02</span><div><b>Explore concerns</b><small>Review observations and care tips</small></div></div>
+        <div class="feature-item"><span class="feature-icon">03</span><div><b>Find your routine</b><small>Discover products within your budget</small></div></div>
+      </div>
+    </section>
+
+    <section id="profile" class="section">
+      <h2>Your Profile</h2>
+      <p class="helper">First complete these two details. Your name is not required.</p>
+      <input id="age" type="number" min="1" max="120" placeholder="Age">
+
+      <div class="skin-type-box">
+        <h3>Your skin type</h3>
+        <p class="small-note">Choose the skin type that best describes your skin.</p>
+        <select id="skinType" class="profile-select">
+          <option value="">Select Skin Type</option>
+          <option value="Oily">Oily</option>
+          <option value="Dry">Dry</option>
+          <option value="Combination">Combination</option>
+          <option value="Normal">Normal</option>
+          <option value="Sensitive">Sensitive</option>
+        </select>
+      </div>
+
+      <div class="budget-box">
+        <h3>Your skincare budget</h3>
+        <p class="small-note">Choose the maximum budget you want the product recommendations to follow.</p>
+        <div class="budget-options">
+          <label class="budget-option"><input type="radio" name="profileBudget" value="Low"> <span><b>Low</b><small>Up to ₹500</small></span></label>
+          <label class="budget-option"><input type="radio" name="profileBudget" value="Medium"> <span><b>Medium</b><small>₹501–₹1,000</small></span></label>
+          <label class="budget-option"><input type="radio" name="profileBudget" value="Flexible"> <span><b>Flexible</b><small>₹1,000+</small></span></label>
+        </div>
+      </div>
+
+      <div class="lifestyle-box">
+        <h3>Choose your lifestyle habits</h3>
+        <p class="small-note">Select all that match you.</p>
+        <div class="checkbox-grid">
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Junk Food"> <span>🍟 Junk Food</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Fast Food"> <span>🍔 Fast Food</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Sugary Drinks"> <span>🥤 Sugary Drinks</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Low Water Intake"> <span>💧 Low Water Intake</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Good Hydration"> <span>💦 Good Hydration</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Poor Sleep"> <span>😴 Poor Sleep</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Regular Sleep"> <span>🛌 Regular Sleep</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="High Stress"> <span>📚 High Stress</span></label>
+          <label class="check-option"><input type="checkbox" name="lifestyle" value="Regular Exercise"> <span>🏃 Regular Exercise</span></label>
+        </div>
+      </div>
+
+      <button class="primary" onclick="saveProfileAndContinue()">Save Profile & Open Camera</button>
+      <p id="profileStatus"></p>
+    </section>
+
+    <section id="analysis" class="section">
+      <h2>Camera Skin Analysis</h2>
+      <p class="helper">Use your front camera in good, even lighting. The camera preview is only used for this analysis flow.</p>
+
+      <div id="cameraGate" class="info-box">Complete your profile first to open the camera.</div>
+
+      <div id="cameraArea" hidden>
+        <div class="camera-frame">
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="captureCanvas" hidden></canvas>
+          <div class="camera-guide">Keep your face centered • Natural light • No beauty filter</div>
+        </div>
+        <div class="camera-actions">
+          <button class="primary" onclick="capturePhoto()">📸 Take Photo</button>
+          <button class="secondary" onclick="startCamera()">↻ Restart Camera</button>
+          <button class="secondary" onclick="stopCamera()">■ Stop Camera</button>
+        </div>
+        <p id="cameraStatus" class="small-note"></p>
+
+        <div class="upload-fallback">
+          <label for="photo"><b>Use an existing photo instead:</b></label>
+          <input id="photo" type="file" accept="image/*" onchange="previewImage(event)">
+        </div>
+        <img id="preview" alt="Captured skin photo preview" class="preview" hidden>
+      </div>
+
+      <div class="concern-box">
+        <h3>Select Your Concerns</h3>
+        <p class="small-note">After you select a concern, a reference image will appear to help explain what that concern generally looks like. It is not a diagnosis.</p>
+        <div class="checkbox-grid concern-choice-grid">
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Acne / Breakouts" onchange="renderConcernReferences()">
+            <img src="assets/concerns/acne-breakouts.jpg" alt="Real facial acne reference">
+            <span><strong>Acne / Breakouts</strong><small>Real facial example: pimples, bumps and clogged pores</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Redness" onchange="renderConcernReferences()">
+            <img src="assets/concerns/redness.jpg" alt="Real facial redness reference">
+            <span><strong>Redness</strong><small>Real facial example of visible redness</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Dryness" onchange="renderConcernReferences()">
+            <img src="assets/concerns/dryness.jpg" alt="Real facial dry and irritated skin reference">
+            <span><strong>Dryness</strong><small>Real facial example of dry/irritated-looking skin</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Oiliness" onchange="renderConcernReferences()">
+            <img src="assets/concerns/oiliness.jpg" alt="Real face reference tagged for oily skin">
+            <span><strong>Oiliness</strong><small>Real face example with a shiny/oily-looking skin reference</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Pigmentation" onchange="renderConcernReferences()">
+            <img src="assets/concerns/pigmentation.jpg" alt="Real facial pigmentation reference">
+            <span><strong>Pigmentation</strong><small>Real facial example of uneven/darker pigmentation</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Sensitivity" onchange="renderConcernReferences()">
+            <img src="assets/concerns/sensitivity.jpg" alt="Real facial sensitivity and dermatitis reference">
+            <span><strong>Sensitivity</strong><small>Real facial example of irritated/reactive skin</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Dullness" onchange="renderConcernReferences()">
+            <img src="assets/concerns/dullness.jpg" alt="Real face reference tagged for dull and dry skin">
+            <span><strong>Dullness</strong><small>Real face example used only as a visual reference for less-bright-looking skin</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="Uneven Texture" onchange="renderConcernReferences()">
+            <img src="assets/concerns/uneven-texture.jpg" alt="Real facial uneven texture reference">
+            <span><strong>Uneven Texture</strong><small>Real facial example of rough/bumpy texture</small></span>
+          </label>
+          <label class="check-option concern-choice">
+            <input type="checkbox" name="concern" value="General Care" onchange="renderConcernReferences()">
+            <img src="assets/concerns/general-care.jpg" alt="Real face reference for general skin care">
+            <span><strong>General Care</strong><small>Real face reference for everyday skin care</small></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="concernReferences" class="concern-reference-grid"></div>
+      <p id="concernError" class="error"></p>
+      <button class="primary" onclick="analyze()">Analyze My Photo & Requirements</button>
+      <div id="result" class="card"></div>
+    </section>
+
+    <section id="products" class="section">
+      <h2>Smart Product Finder</h2>
+      <div id="productMessage" class="info-box">First complete Camera Analysis. Your matched real-brand products will be refreshed from the Live Product API.</div>
+      <div id="productControls" hidden>
+        <select id="brand" onchange="renderProducts()">
+          <option>All Brands</option><option>Cetaphil</option><option>Dot & Key</option><option>Plum</option><option>The Derma Co</option><option>Deconstruct</option>
+        </select>
+        <select id="category" onchange="renderProducts()">
+          <option>All</option><option>Cleanser</option><option>Moisturizer</option>
+          <option>Sunscreen</option><option>Serum</option>
+        </select>
+        <select id="productBudget" onchange="renderProducts()">
+          <option>All</option><option>Low</option><option>Medium</option><option>Flexible</option>
+        </select>
+      </div>
+      <div id="productList" class="grid"></div>
+    </section>
+
+    <section id="dashboard" class="section">
+      <h2>Dashboard</h2>
+      <div id="dashboardData"></div>
+      <h3>Analysis History</h3>
+      <div id="history"></div>
+    </section>
+  </main>
+
+  <div id="productModal" class="modal" hidden onclick="closeProductModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeProductModal()">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer><span class="footer-brand">DermaSense <b>AI</b></span><span>Thoughtful skincare starts with you.</span><small>Educational guidance only · Not a medical diagnosis</small></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
