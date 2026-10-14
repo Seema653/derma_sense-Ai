@@ -1,58 +1,113 @@
-# DermaSense AI 2.0 — Integrated Project
+# DermaSense AI 2.0 – Skin Image Analysis
 
-This folder combines the frontend, live/cached product catalog API, Flask backend, SQLite storage, skin image analysis module, and decision engine.
+## Overview
 
-## Requirements
-- Python 3.10 or newer
-- Internet connection is only needed when the product endpoint attempts to refresh official product pages. If a shop blocks requests, cached product details are returned.
+This module performs basic visible skin image analysis for the DermaSense AI 2.0 project.
 
-## Windows setup (Command Prompt)
-1. Extract this ZIP.
-2. Open the extracted `DermaSense_Integrated` folder.
-3. Click the folder address bar, type `cmd`, and press Enter.
-4. Create a virtual environment:
-   ```
-   python -m venv .venv
-   ```
-5. Activate it:
-   ```
-   .venv\Scripts\activate
-   ```
-6. Install dependencies:
-   ```
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
-7. Start the application:
-   ```
-   python backend\app.py
-   ```
-8. Keep the terminal open and visit:
-   http://127.0.0.1:5000
+The module analyzes an uploaded skin image and provides explainable observations based on visible image patterns.
 
-## Basic checks
-- Health endpoint: http://127.0.0.1:5000/api/health
-- Products endpoint: http://127.0.0.1:5000/api/products
-- The browser workflow is Profile → Camera/Existing Photo → choose concern → Analyze → Recommended Products.
-- Image analysis uses visible-image heuristics and may reject dark, overexposed, low-contrast, or blurry photos. It is not a medical diagnosis.
+## Features
 
-## API routes
-- `GET /api/health`
-- `GET /api/products`
-- `POST /api/profile` (JSON)
-- `POST /api/analyze-skin` (multipart form: `image`, `concern`, `profile`)
-- `GET /api/history` (optional `profile_id`)
+* Image loading and validation
+* Image quality checking
+* Brightness analysis
+* Contrast analysis
+* Sharpness / blur detection
+* Shine-like visible area detection
+* Redness-like visible area detection
+* Darker visible area detection
+* Texture-like visible variation detection
+* Signal values for analysis
+* Explainable observations
+* Medical safety disclaimer
 
-SQLite database and uploaded images are created under `backend/` on first run.
+## Main File
 
-## Notes
-- The backend saves profiles, analysis observations, and decision-engine recommendations to SQLite.
-- Product pages can block automated refresh. The catalog then returns cached details and marks them as not live.
-- Do not commit `.venv`, API keys, or private data into source control.
+```text
+skin_analyzer.py
+```
 
+Main function:
 
-## Premium UI update
-The current build uses a warm ivory, sage and botanical-green design palette, responsive navigation, an editorial home hero, redesigned form cards, camera frame, product cards and mobile layouts. Google Fonts are loaded when internet access is available; system fallbacks are included.
+```python
+analyze_skin_image(image_path, user_concern=None)
+```
 
-## Important AI/API note
-This UI refresh does not add a third-party AI chat API or require an API key. The current skin-analysis flow remains the existing project workflow. When adding an AI provider, keep the secret key in the Flask backend environment (never in `js/app.js` or HTML), and test the AI endpoint separately.
+## Testing
+
+A sample image can be tested using:
+
+```bash
+python test_skin_analyzer.py sample.jpg
+```
+
+The analyzer checks whether the image is suitable for visible-pattern analysis before performing the analysis.
+
+## Output
+
+The module returns information such as:
+
+```text
+Image quality
+Observations
+Concerns
+Signal values
+User concern
+```
+
+Example observations include:
+
+```text
+Shine-like visible areas
+Redness-like visible areas
+Darker visible areas
+Texture-like visible variation
+```
+
+## Image Quality
+
+The module checks:
+
+* Brightness
+* Contrast
+* Sharpness
+
+If the image quality is too low, the analysis is not performed.
+
+## Safety
+
+This module provides visual observations only.
+
+It does not provide:
+
+* Medical diagnosis
+* Disease diagnosis
+* Treatment recommendations
+* Medication recommendations
+
+Disclaimer:
+
+> Observations only — not a medical diagnosis.
+
+## Project Role
+
+This module is the **Skin Image Analysis component** of DermaSense AI 2.0.
+
+The Flask backend and frontend integration are handled by other project members.
+
+## Supported Image Types
+
+Common image formats such as:
+
+```text
+JPG
+JPEG
+PNG
+WEBP
+```
+
+can be used as input, subject to the image library's support.
+
+## Testing Status
+
+The module has been tested using a sample skin image and the analysis completed successfully.
