@@ -14,6 +14,9 @@ from flask_cors import CORS
 BASE_DIR = Path(__file__).resolve().parent.parent
 app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path="")
 CORS(app)
+@app.get("/")
+def home():
+    return send_from_directory(str(BASE_DIR), "index.html")
 
 
 import os
